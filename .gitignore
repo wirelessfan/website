@@ -1,0 +1,9 @@
+public/
+resources/
+.hugo_build.lock
+tools/
+*.pem
+*.key
+*.pem.*
+.DS_Store
+Thumbs.db

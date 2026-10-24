@@ -1,0 +1,73 @@
+baseURL: "http://123.56.217.104/"
+title: "BW 技术札记"
+theme: "PaperMod"
+locale: "zh-cn"
+defaultContentLanguage: "zh"
+hasCJKLanguage: true
+enableRobotsTXT: true
+enableEmoji: true
+summaryLength: 120
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+taxonomies:
+  category: categories
+  tag: tags
+
+menu:
+  main:
+    - identifier: chip
+      name: 芯片设计与选型
+      url: /chip/
+      weight: 10
+    - identifier: network
+      name: 网络技术优化
+      url: /network/
+      weight: 20
+    - identifier: ai
+      name: AI 自动化
+      url: /ai/
+      weight: 30
+    - identifier: archives
+      name: 归档
+      url: /archives/
+      weight: 40
+    - identifier: search
+      name: 搜索
+      url: /search/
+      weight: 50
+    - identifier: about
+      name: 关于
+      url: /about/
+      weight: 60
+
+params:
+  env: production
+  defaultTheme: auto
+  ShowReadingTime: true
+  ShowShareButtons: false
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowToc: true
+  mainSections: ["chip", "network", "ai"]
+  homeInfoParams:
+    Title: BW 技术札记
+    Content: >
+      记录芯片设计与选型、网络技术优化、AI 自动化三个方向的工程实践与探讨。
+
+      文章多源自真实项目的调研、选型与复盘，欢迎同行指正交流。
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    style: monokai
+    noClasses: true
+    lineNos: false
+    codeFences: true

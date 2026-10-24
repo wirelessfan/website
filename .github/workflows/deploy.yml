@@ -1,0 +1,33 @@
+# GitHub Actions: push 到 main 自动构建并部署到 VPS。
+# 首次使用需在仓库 Settings → Secrets 配置:
+#   VPS_SSH_KEY  — 可以登录 VPS 的私钥（pem 内容，含 BEGIN/END 行）
+name: Deploy blog
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.168.0"
+          extended: true
+
+      - name: Build
+        run: hugo --gc --minify
+
+      - name: Deploy to VPS
+        uses: easingthemes/ssh-deploy@v5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_KEY }}
+          REMOTE_HOST: 123.56.217.104
+          REMOTE_USER: root
+          TARGET: /var/www/blog/
+          ARGS: -avz --delete

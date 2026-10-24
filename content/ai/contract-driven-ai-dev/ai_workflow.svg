@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 280" font-family="system-ui, 'Segoe UI', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a6472"/>
+    </marker>
+  </defs>
+  <style>
+    .box { fill: #eceff3; stroke: #8a94a0; stroke-width: 1.5; rx: 8; }
+    .ok  { fill: #e3f1e3; stroke: #4e8a4e; }
+    .t   { fill: #24292f; font-size: 15px; text-anchor: middle; }
+    .ts  { fill: #5a6472; font-size: 12px; text-anchor: middle; }
+  </style>
+
+  <rect class="box" x="20"  y="60" width="150" height="60" rx="8"/>
+  <text class="t" x="95"  y="86">任务书</text>
+  <text class="ts" x="95" y="106">范围 · 接收条件</text>
+
+  <rect class="box" x="240" y="60" width="150" height="60" rx="8"/>
+  <text class="t" x="315" y="86">契约包</text>
+  <text class="ts" x="315" y="106">接口 · 状态机 · 测试向量</text>
+
+  <rect class="box" x="460" y="60" width="150" height="60" rx="8"/>
+  <text class="t" x="535" y="86">AI 首轮实现</text>
+  <text class="ts" x="535" y="106">代码 + 测试 + 日志</text>
+
+  <rect class="box" x="680" y="60" width="150" height="60" rx="8"/>
+  <text class="t" x="755" y="86">AI 独立 Review</text>
+  <text class="ts" x="755" y="106">位置 · 探针 · 要求</text>
+
+  <rect class="box ok" x="680" y="200" width="150" height="50" rx="8"/>
+  <text class="t" x="755" y="230">验收合入</text>
+
+  <line x1="170" y1="90" x2="238" y2="90" stroke="#5a6472" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="390" y1="90" x2="458" y2="90" stroke="#5a6472" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="610" y1="90" x2="678" y2="90" stroke="#5a6472" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <path d="M 755 120 L 755 160 L 315 160 L 315 128" fill="none" stroke="#5a6472" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text class="ts" x="535" y="152">findings 未关闭：修订任务书（冻结范围，只修不扩）</text>
+
+  <line x1="755" y1="120" x2="755" y2="198" stroke="#4e8a4e" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text class="ts" x="790" y="185" text-anchor="start">全部关闭</text>
+</svg>

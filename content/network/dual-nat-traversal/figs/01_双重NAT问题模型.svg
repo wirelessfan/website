@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" font-family="Microsoft YaHei, PingFang SC, sans-serif">
+  <defs>
+    <marker id="arrG" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#2e7d32"/>
+    </marker>
+    <marker id="arrR" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#c62828"/>
+    </marker>
+  </defs>
+
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="bold" fill="#212121">问题模型：公司 → 家里电脑，隔了几道 NAT</text>
+
+  <!-- home side -->
+  <rect x="30" y="150" width="150" height="80" rx="8" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="105" y="183" text-anchor="middle" font-size="15" font-weight="bold">家里电脑</text>
+  <text x="105" y="205" text-anchor="middle" font-size="12" fill="#555">192.168.1.100（内网）</text>
+
+  <rect x="220" y="150" width="160" height="80" rx="8" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+  <text x="300" y="178" text-anchor="middle" font-size="15" font-weight="bold">MiFi（我们的产品）</text>
+  <text x="300" y="198" text-anchor="middle" font-size="12" fill="#555">NAPT：第一道 NAT</text>
+  <text x="300" y="216" text-anchor="middle" font-size="12" fill="#c62828">WAN=100.64.12.34（CGN共享段）</text>
+
+  <rect x="420" y="150" width="180" height="80" rx="8" fill="#fff3e0" stroke="#ef6c00" stroke-width="2"/>
+  <text x="510" y="178" text-anchor="middle" font-size="15" font-weight="bold">运营商 CGNAT</text>
+  <text x="510" y="198" text-anchor="middle" font-size="12" fill="#555">第二道 NAT（用户不可配！）</text>
+  <text x="510" y="216" text-anchor="middle" font-size="12" fill="#c62828">出口 203.0.113.7（N 人共享）</text>
+
+  <rect x="640" y="150" width="110" height="80" rx="8" fill="#f5f5f5" stroke="#757575" stroke-width="2"/>
+  <text x="695" y="195" text-anchor="middle" font-size="15" font-weight="bold">Internet</text>
+
+  <rect x="790" y="150" width="150" height="80" rx="8" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="865" y="183" text-anchor="middle" font-size="15" font-weight="bold">公司 PC</text>
+  <text x="865" y="205" text-anchor="middle" font-size="12" fill="#555">公司 NAT 之后</text>
+
+  <!-- arrows home -> company (outbound OK) -->
+  <line x1="180" y1="190" x2="216" y2="190" stroke="#2e7d32" stroke-width="3" marker-end="url(#arrG)"/>
+  <line x1="380" y1="190" x2="416" y2="190" stroke="#2e7d32" stroke-width="3" marker-end="url(#arrG)"/>
+  <line x1="600" y1="190" x2="636" y2="190" stroke="#2e7d32" stroke-width="3" marker-end="url(#arrG)"/>
+  <line x1="750" y1="190" x2="786" y2="190" stroke="#2e7d32" stroke-width="3" marker-end="url(#arrG)"/>
+  <text x="470" y="128" text-anchor="middle" font-size="14" fill="#2e7d32">出站连接 ✅ NAT 全部放行，映射自动建立（穿透的立足点）</text>
+
+  <!-- inbound blocked -->
+  <line x1="790" y1="270" x2="610" y2="270" stroke="#c62828" stroke-width="3" stroke-dasharray="8,5" marker-end="url(#arrR)"/>
+  <text x="700" y="300" text-anchor="middle" font-size="14" fill="#c62828">入站直连 ❌ 包到 CGNAT 出口后无人认领，丢弃</text>
+  <line x1="380" y1="270" x2="240" y2="270" stroke="#c62828" stroke-width="3" stroke-dasharray="8,5" marker-end="url(#arrR)"/>
+  <text x="310" y="300" text-anchor="middle" font-size="13" fill="#c62828">MiFi 的端口映射也没用（WAN 地址不可路由）</text>
+
+  <!-- key conclusion -->
+  <rect x="120" y="340" width="720" height="70" rx="10" fill="#fbe9e7" stroke="#c62828" stroke-width="2"/>
+  <text x="480" y="368" text-anchor="middle" font-size="15" font-weight="bold" fill="#b71c1c">双重 NAT：入站 100% 不通；4G/5G 附加：IP 漂移、UDP 老化 30~180s、对称 NAT 打洞必败</text>
+  <text x="480" y="392" text-anchor="middle" font-size="14" fill="#b71c1c">→ 唯一可靠路线：内网侧主动外连 + 公网中继（花生壳/frp 的本质）</text>
+</svg>
