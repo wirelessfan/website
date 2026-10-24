@@ -1,6 +1,7 @@
 ---
 title: "契约驱动的 AI 协作开发：任务书、实现与 Review 的闭环"
 date: 2026-10-24
+categories: ["AI协作工作流"]
 tags: ["AI 协作", "工作流", "嵌入式"]
 description: "把 AI 分别当实现者与审查者使用，用契约包和任务书固定边界，用多轮 Review 关闭 findings——一轮固件模块重构中沉淀的工作流与教训。"
 ---

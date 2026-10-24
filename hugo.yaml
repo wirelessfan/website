@@ -32,6 +32,10 @@ menu:
       name: AI 自动化
       url: /ai/
       weight: 30
+    - identifier: topics
+      name: 主题
+      url: /topics/
+      weight: 35
     - identifier: archives
       name: 归档
       url: /archives/

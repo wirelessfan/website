@@ -1,0 +1,50 @@
+{{- define "main" }}
+
+<header class="page-header">
+    <h1>{{ .Title }}</h1>
+    {{- if .Description }}
+    <div class="post-description">
+        {{ .Description }}
+    </div>
+    {{- end }}
+</header>
+
+<div class="post-content md-content topics-map">
+    {{ .Content }}
+
+    {{- range $sec := site.Data.topics.sections }}
+    <section class="topic-section">
+        <h2>
+            {{- with site.GetPage (printf "/%s/" $sec.key) }}
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            {{- else }}
+            {{ $sec.title }}
+            {{- end }}
+        </h2>
+        {{- with $sec.description }}
+        <p class="topic-section-desc">{{ . }}</p>
+        {{- end }}
+        <ul class="topic-cats">
+            {{- range $cat := $sec.categories }}
+            {{- $name := $cat.name }}
+            {{- $pages := where (where site.RegularPages "Type" $sec.key) "Params.categories" "intersect" (slice $name) }}
+            <li>
+                {{- with site.GetPage (printf "/categories/%s" $name) }}
+                <a class="topic-cat-link" href="{{ .Permalink }}">{{ $name }}</a>
+                {{- else }}
+                <span class="topic-cat-link topic-cat-empty">{{ $name }}</span>
+                {{- end }}
+                <sup class="topic-cat-count">{{ len $pages }}</sup>
+                {{- with $cat.description }}
+                <span class="topic-cat-desc">— {{ . }}</span>
+                {{- end }}
+            </li>
+            {{- end }}
+        </ul>
+    </section>
+    {{- end }}
+
+    <p class="topic-note">栏目是三大方向，主题分类是栏目内的固定归类（新文章请从中选取）；标签是自由关键词，用于细粒度检索——见每篇文章文末与「归档」页。</p>
+</div>
+
+{{- end }}{{/* end main */ -}}

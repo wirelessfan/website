@@ -46,6 +46,7 @@ ssh aliyun "bash -s" < deploy/server-setup.sh
 
 ## 写作约定（重要）
 
+- **三层分类**：栏目（`content/chip|network|ai`）→ 主题分类（`categories`，从 `data/topics.yaml` 框架中选取，一个栏目可写多个）→ 标签（`tags`，自由关键词）。框架本身在 `data/topics.yaml` 维护，「主题」页自动渲染并计数。
 - **脱敏**：不写真实公网 IP（试验台 IP、实例 ID）、密钥、客户名称、公司内部代码路径；示例一律用 RFC 5737 地址（如 `203.0.113.x`）。
 - 内容基于真实项目复盘，选型结论注明前提条件与时间。
 - 大文件/图片放文章同名 bundle 目录内，不要引用仓库外路径。

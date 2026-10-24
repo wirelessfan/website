@@ -1,0 +1,42 @@
+# 站点主题分类框架：栏目 → 主题分类 → 标签（自由关键词）
+# 新增文章时：categories 从对应栏目的分类中选取；标签自由填写。
+# 修改此文件后 hugo 会自动重建「主题」页（layouts/page/topics.html 渲染）。
+sections:
+  - key: chip
+    title: 芯片设计与选型
+    description: DSP/MCU/SoC 平台选型、算法库与 IP 评估、板级 bring-up 与资源实测。
+    categories:
+      - name: 算法库与IP选型
+        description: 语音/视觉/连接类算法库与商用 IP 的评估、授权与集成路径
+      - name: 平台与SoC选型
+        description: 处理器架构、算力、外设与工具链对比
+      - name: 板级调试与Bring-up
+        description: 新板点亮、驱动适配、调试器与日志手段
+      - name: 资源与性能分析
+        description: 内存/算力/实时性实测与瓶颈分析
+
+  - key: network
+    title: 网络技术优化
+    description: NAT 穿透、WireGuard、嵌入式网络协议栈与数据面加速。
+    categories:
+      - name: NAT与内网穿透
+        description: 双重 NAT 问题模型、打洞/中继/组网路线与实测
+      - name: WireGuard与隧道
+        description: WG 原理、FreeRTOS 移植与隧道架构
+      - name: 嵌入式协议实现
+        description: lwIP、报文编解码、接口与生命周期契约
+      - name: 数据面与性能优化
+        description: 零拷贝/卸载/加速，吞吐与时延优化
+
+  - key: ai
+    title: AI 自动化
+    description: AI 辅助研发的工作流、流水线与工具链实践。
+    categories:
+      - name: AI协作工作流
+        description: 契约驱动、任务书与多轮 Review 方法
+      - name: 研发自动化
+        description: 构建/测试/发布流水线与自动化验收
+      - name: 文档与知识管理
+        description: AI 辅助写作、文档工程与博客自动化
+      - name: 工具链与智能体
+        description: ZCode/Codex/MCP 等工具与智能体实践

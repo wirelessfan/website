@@ -1,6 +1,7 @@
 ---
 title: "HiFi4 语音算法库选型：开源预研与商业量产两条线"
 date: 2026-05-20
+categories: ["算法库与IP选型"]
 tags: ["DSP", "HiFi4", "语音算法", "选型"]
 description: "面向 Cadence Tensilica HiFi4 的 AMR 编解码与 AEC/NS/AGC/VAD 前处理选型分析：开源怎么起步、商业怎么询价、AMR 专利为何要单独看。"
 ---
