@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="NAT 查表动画：五元组装 key、FNV 哈希、位切片派生、4 路组相联比较与 ib1 判决">
+<rect width="1600" height="900" fill="#f8fafc"/>
+<defs>
+<marker id="ar" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7Z" fill="#7c3aed"/></marker>
+<marker id="arb" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7Z" fill="#1d4ed8"/></marker>
+</defs>
+<style>
+.ttl{font:700 27px 'Microsoft YaHei','Segoe UI',sans-serif;fill:#0f172a}
+.sub{font:400 14px 'Microsoft YaHei','Segoe UI',sans-serif;fill:#475569}
+.dir{font:700 13px 'Consolas',monospace;fill:#0f766e}
+.st{font:700 15px 'Microsoft YaHei','Segoe UI',sans-serif;fill:#ffffff}
+.ph{font:700 14px 'Microsoft YaHei','Segoe UI',sans-serif;fill:#0f172a}
+.fl{font:400 10.5px 'Consolas','Microsoft YaHei',monospace;fill:#94a3b8}
+.fv{font:600 14px 'Consolas',monospace;fill:#e2e8f0}
+.bcell{font:600 12px 'Consolas',monospace;fill:#e2e8f0}
+.grp{font:400 10px 'Microsoft YaHei','Segoe UI',sans-serif;fill:#5eead4}
+.cv{font:700 13.5px 'Consolas',monospace;fill:#1e3a8a}
+.cbig{font:700 20px 'Consolas',monospace;fill:#1e3a8a}
+.cl{font:400 10.5px 'Consolas',monospace;fill:#7c3aed}
+.ck{font:400 11.5px 'Microsoft YaHei','Segoe UI',sans-serif;fill:#475569}
+.lg{font:400 12px 'Microsoft YaHei','Segoe UI',sans-serif;fill:#334155}
+.mib{font:600 13px 'Consolas',monospace;fill:#0f766e}
+.bit1{font:600 10px 'Consolas',monospace;fill:#e2e8f0}
+.bit0{font:600 10px 'Consolas',monospace;fill:#475569}
+</style>
+<rect width="1600" height="6" fill="#6d28d9"/>
+<text x="40" y="46" class="ttl">NAT 查表 · 五元组 → 哈希 → 4 路组相联 → 判决   （教学演示模型）</text>
+<text x="40" y="72" class="sub">同一条流的两方向 key 不同、各占一个主表槽位 —— 8192 项 = 4096 连接 × 2 方向 · 22s 循环</text>
+<text x="1560" y="72" class="dir" text-anchor="end">下行示例：sip 8.8.8.8 → dip 100.64.8.3 : 40001</text>
+<rect x="40" y="92" width="1520" height="54" rx="10" fill="#ffffff" stroke="#e2e8f0"/>
+<rect x="58" y="102" width="352" height="34" rx="8" fill="#0f766e" opacity="0.22"><animate attributeName="opacity" values="0.22;0.22;1;1;0.22;0.22" keyTimes="0.00000;0.03636;0.05000;0.23636;0.25000;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="74" y="125" class="st" fill="#ffffff" opacity="0.6">① 五元组装 key<animate attributeName="opacity" values="0.6;0.6;1;1;0.6;0.6" keyTimes="0.00000;0.03636;0.05000;0.23636;0.25000;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<path d="M412 119 L421 119" stroke="#cbd5e1" stroke-width="2"/>
+<rect x="424" y="102" width="352" height="34" rx="8" fill="#1d4ed8" opacity="0.22"><animate attributeName="opacity" values="0.22;0.22;1;1;0.22;0.22" keyTimes="0.00000;0.23636;0.25000;0.51818;0.53182;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="440" y="125" class="st" fill="#ffffff" opacity="0.6">② FNV 哈希<animate attributeName="opacity" values="0.6;0.6;1;1;0.6;0.6" keyTimes="0.00000;0.23636;0.25000;0.51818;0.53182;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<path d="M778 119 L787 119" stroke="#cbd5e1" stroke-width="2"/>
+<rect x="790" y="102" width="352" height="34" rx="8" fill="#6d28d9" opacity="0.22"><animate attributeName="opacity" values="0.22;0.22;1;1;0.22;0.22" keyTimes="0.00000;0.51818;0.53182;0.65455;0.66818;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="806" y="125" class="st" fill="#ffffff" opacity="0.6">③ 位切片派生<animate attributeName="opacity" values="0.6;0.6;1;1;0.6;0.6" keyTimes="0.00000;0.51818;0.53182;0.65455;0.66818;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<path d="M1144 119 L1153 119" stroke="#cbd5e1" stroke-width="2"/>
+<rect x="1156" y="102" width="352" height="34" rx="8" fill="#b45309" opacity="0.22"><animate attributeName="opacity" values="0.22;0.22;1;1;0.22;0.22" keyTimes="0.00000;0.65455;0.66818;0.81818;0.83182;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="1172" y="125" class="st" fill="#ffffff" opacity="0.6">④ 查表 + 判决<animate attributeName="opacity" values="0.6;0.6;1;1;0.6;0.6" keyTimes="0.00000;0.65455;0.66818;0.81818;0.83182;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="40" y="190" class="ph">① 五元组装进 16B key（x86 LE 布局）</text>
+<text x="370" y="190" class="ck" fill="#64748b">zone=0 → 种子=0；rsv=0 参与哈希</text>
+<rect x="40" y="204" width="120" height="44" rx="4" fill="#0b1220" opacity="0.25" stroke="#0f766e" stroke-width="1.5"><animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.05455;0.06591;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="40" y="264" class="grp" opacity="0.25">sip<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.05455;0.06591;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="49" y="232" class="bcell" opacity="0.25">08<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.05455;0.06136;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="79" y="232" class="bcell" opacity="0.25">08<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.06000;0.06682;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="109" y="232" class="bcell" opacity="0.25">08<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.06545;0.07227;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="139" y="232" class="bcell" opacity="0.25">08<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.07091;0.07773;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="174" y="204" width="120" height="44" rx="4" fill="#0b1220" opacity="0.25" stroke="#0f766e" stroke-width="1.5"><animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.10000;0.11136;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="174" y="264" class="grp" opacity="0.25">dip<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.10000;0.11136;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="183" y="232" class="bcell" opacity="0.25">03<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.10000;0.10682;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="213" y="232" class="bcell" opacity="0.25">08<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.10545;0.11227;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="243" y="232" class="bcell" opacity="0.25">40<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.11091;0.11773;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="273" y="232" class="bcell" opacity="0.25">64<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.11636;0.12318;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="308" y="204" width="60" height="44" rx="4" fill="#0b1220" opacity="0.25" stroke="#0f766e" stroke-width="1.5"><animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.14091;0.15227;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="308" y="264" class="grp" opacity="0.25">sport<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.14091;0.15227;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="317" y="232" class="bcell" opacity="0.25">BB<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.14091;0.14773;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="347" y="232" class="bcell" opacity="0.25">01<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.14636;0.15318;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="382" y="204" width="60" height="44" rx="4" fill="#0b1220" opacity="0.25" stroke="#0f766e" stroke-width="1.5"><animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.16818;0.17955;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="382" y="264" class="grp" opacity="0.25">dport<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.16818;0.17955;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="391" y="232" class="bcell" opacity="0.25">41<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.16818;0.17500;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="421" y="232" class="bcell" opacity="0.25">9C<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.17364;0.18045;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="456" y="204" width="30" height="44" rx="4" fill="#0b1220" opacity="0.25" stroke="#0f766e" stroke-width="1.5"><animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.19091;0.20227;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="456" y="264" class="grp" opacity="0.25">proto<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.19091;0.20227;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="465" y="232" class="bcell" opacity="0.25">06<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.19091;0.19773;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="500" y="204" width="30" height="44" rx="4" fill="#0b1220" opacity="0.25" stroke="#0f766e" stroke-width="1.5"><animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.20455;0.21591;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="500" y="264" class="grp" opacity="0.25">zone<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.20455;0.21591;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="509" y="232" class="bcell" opacity="0.25">00<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.20455;0.21136;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="544" y="204" width="60" height="44" rx="4" fill="#0b1220" opacity="0.25" stroke="#0f766e" stroke-width="1.5"><animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.21818;0.22955;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="544" y="264" class="grp" opacity="0.25">rsv<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.21818;0.22955;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="553" y="232" class="bcell" opacity="0.25">00<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.21818;0.22500;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="583" y="232" class="bcell" opacity="0.25">00<animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.22364;0.23045;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="634" y="232" class="ck" fill="#64748b" opacity="0.4">← 16B<animate attributeName="opacity" values="0.4;0.4;1;1" keyTimes="0.00000;0.22273;0.23182;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="40" y="320" class="ph">② FNV 变体逐字节消化</text>
+<rect x="40" y="334" width="250" height="44" rx="6" fill="#ffffff" opacity="1.0" stroke="#1d4ed8" stroke-width="1.5"></rect>
+<text x="165" y="362" class="cv" text-anchor="middle" opacity="0">h₀ = 0x811C9DC5<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.24545;0.25682;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="315" y="362" class="ck" fill="#64748b" opacity="0">×16777619 (⊕b)<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.25909;0.26818;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<g opacity="0"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.29091;0.29773;1.00000" dur="22.0s" repeatCount="indefinite"/><path d="M436 356 L462 356" stroke="#1d4ed8" stroke-width="2" marker-end="url(#arb)"/></g>
+<text x="449" y="328" class="cl" text-anchor="middle" opacity="0">sip 后<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.29091;0.29773;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="470" y="334" width="128" height="44" rx="6" fill="#ffffff" opacity="0" stroke="#cbd5e1" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.29091;0.29773;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="534" y="362" class="cv" text-anchor="middle" opacity="0">0x8C19A815<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.29091;0.29773;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<g opacity="0"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.34545;0.35227;1.00000" dur="22.0s" repeatCount="indefinite"/><path d="M586 356 L612 356" stroke="#1d4ed8" stroke-width="2" marker-end="url(#arb)"/></g>
+<text x="599" y="328" class="cl" text-anchor="middle" opacity="0">dip 后<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.34545;0.35227;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="620" y="334" width="128" height="44" rx="6" fill="#ffffff" opacity="0" stroke="#cbd5e1" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.34545;0.35227;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="684" y="362" class="cv" text-anchor="middle" opacity="0">0x7DAD373A<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.34545;0.35227;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<g opacity="0"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.40000;0.40682;1.00000" dur="22.0s" repeatCount="indefinite"/><path d="M736 356 L762 356" stroke="#1d4ed8" stroke-width="2" marker-end="url(#arb)"/></g>
+<text x="749" y="328" class="cl" text-anchor="middle" opacity="0">dport 后<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.40000;0.40682;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="770" y="334" width="128" height="44" rx="6" fill="#ffffff" opacity="0" stroke="#cbd5e1" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.40000;0.40682;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="834" y="362" class="cv" text-anchor="middle" opacity="0">0xADD3520B<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.40000;0.40682;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<g opacity="0"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.46364;0.47045;1.00000" dur="22.0s" repeatCount="indefinite"/><path d="M886 356 L912 356" stroke="#1d4ed8" stroke-width="2" marker-end="url(#arb)"/></g>
+<text x="899" y="328" class="cl" text-anchor="middle" opacity="0">终值<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.46364;0.47045;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="920" y="334" width="128" height="44" rx="6" fill="#ffffff" opacity="0" stroke="#16a34a" stroke-width="2.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.46364;0.47045;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="984" y="362" class="cbig" text-anchor="middle" opacity="0">0xB675A5DD<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.46364;0.47045;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<g opacity="0"><animate attributeName="opacity" values="0;0;1;1;1" keyTimes="0.00000;0.23636;0.24545;0.50909;1.00000" dur="22.0s" repeatCount="indefinite"/><rect x="40" y="412" width="564" height="4" fill="#e2e8f0" rx="2"/><rect x="40" y="412" width="0" height="4" fill="#1d4ed8" rx="2"><animate attributeName="width" values="0;0;564;564" keyTimes="0.00000;0.23636;0.49545;1.00000" dur="22.0s" repeatCount="indefinite"/></rect><text x="614" y="417" class="ck" fill="#1d4ed8">16B 消化进度</text></g>
+<text x="1040" y="190" class="ph">③ 位切片派生</text>
+<rect x="1040" y="206" width="504.0" height="34" rx="6" fill="#0b1220" opacity="0.25" stroke="#334155" stroke-width="1.5"><animate attributeName="opacity" values="0.25;0.25;1;1" keyTimes="0.00000;0.51818;0.53182;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="1048.0" y="230" class="bit1" opacity="0">1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.51818;0.52273;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1063.5" y="230" class="bit0" opacity="0">0<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.51909;0.52364;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1079.0" y="230" class="bit1" opacity="0">1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.52000;0.52455;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1094.5" y="230" class="bit1" opacity="0">1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.52091;0.52545;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1110.0" y="230" class="bit0" opacity="0">0<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.52182;0.52636;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1125.5" y="230" class="bit1" opacity="0">1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.52273;0.52727;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1141.0" y="230" class="bit1" opacity="0">1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.52364;0.52818;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1156.5" y="230" class="bit0" opacity="0">0<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.52455;0.52909;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1172.0" y="230" class="bit0" opacity="0">0<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.52545;0.53000;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1187.5" y="230" class="bit1" opacity="0">1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.52636;0.53091;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1203.0" y="230" class="bit1" opacity="0">1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.52727;0.53182;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1218.5" y="230" class="bit1" opacity="0">1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.52818;0.53273;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1234.0" y="230" class="bit0" opacity="0">0<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.52909;0.53364;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1249.5" y="230" class="bit1" opacity="0">1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.53000;0.53455;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1265.0" y="230" class="bit0" opacity="0">0<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.53091;0.53545;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1280.5" y="230" class="bit1" opacity="0">1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.53182;0.53636;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1296.0" y="230" class="bit1" opacity="0">1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.53273;0.53727;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1311.5" y="230" class="bit0" opacity="0">0<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.53364;0.53818;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1327.0" y="230" class="bit1" opacity="0">1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.53455;0.53909;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1342.5" y="230" class="bit0" opacity="0">0<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.53545;0.54000;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1358.0" y="230" class="bit0" opacity="0">0<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.53636;0.54091;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1373.5" y="230" class="bit1" opacity="0">1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.53727;0.54182;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1389.0" y="230" class="bit0" opacity="0">0<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.53818;0.54273;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1404.5" y="230" class="bit1" opacity="0">1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.53909;0.54364;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1420.0" y="230" class="bit1" opacity="0">1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.54000;0.54455;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1435.5" y="230" class="bit1" opacity="0">1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.54091;0.54545;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1451.0" y="230" class="bit0" opacity="0">0<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.54182;0.54636;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1466.5" y="230" class="bit1" opacity="0">1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.54273;0.54727;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1482.0" y="230" class="bit1" opacity="0">1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.54364;0.54818;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1497.5" y="230" class="bit1" opacity="0">1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.54455;0.54909;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1513.0" y="230" class="bit0" opacity="0">0<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.54545;0.55000;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1528.5" y="230" class="bit1" opacity="0">1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.54636;0.55091;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<g opacity="0"><animate attributeName="opacity" values="0;0;0.8;0.8" keyTimes="0.00000;0.56364;0.57273;1.00000" dur="22.0s" repeatCount="indefinite"/><line x1="1338.5" y1="242" x2="1338.5" y2="264" stroke="#16a34a" stroke-width="1.2" stroke-dasharray="3 3"/><line x1="1538.0" y1="242" x2="1538.0" y2="264" stroke="#16a34a" stroke-width="1.2" stroke-dasharray="3 3"/></g>
+<rect x="1336.5" y="264" width="203.5" height="30" rx="6" fill="none" opacity="0" stroke="#16a34a" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.56364;0.57273;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="1336.5" y="310" class="ck" fill="#16a34a" opacity="0">full_idx = 1501 主表槽位<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.56818;0.57727;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<g opacity="0"><animate attributeName="opacity" values="0;0;0.8;0.8" keyTimes="0.00000;0.59091;0.60000;1.00000" dur="22.0s" repeatCount="indefinite"/><line x1="1106.0" y1="242" x2="1106.0" y2="322" stroke="#6d28d9" stroke-width="1.2" stroke-dasharray="3 3"/><line x1="1336.5" y1="242" x2="1336.5" y2="322" stroke="#6d28d9" stroke-width="1.2" stroke-dasharray="3 3"/></g>
+<rect x="1104.0" y="322" width="234.5" height="30" rx="6" fill="none" opacity="0" stroke="#6d28d9" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.59091;0.60000;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="1104.0" y="368" class="ck" fill="#6d28d9" opacity="0">tag = 0x33AD<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.59545;0.60455;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<g opacity="0"><animate attributeName="opacity" values="0;0;0.8;0.8" keyTimes="0.00000;0.61818;0.62727;1.00000" dur="22.0s" repeatCount="indefinite"/><line x1="1245.5" y1="242" x2="1245.5" y2="380" stroke="#1d4ed8" stroke-width="1.2" stroke-dasharray="3 3"/><line x1="1336.5" y1="242" x2="1336.5" y2="380" stroke="#1d4ed8" stroke-width="1.2" stroke-dasharray="3 3"/></g>
+<rect x="1243.5" y="380" width="95.0" height="30" rx="6" fill="none" opacity="0" stroke="#1d4ed8" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.61818;0.62727;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="1243.5" y="426" class="ck" fill="#1d4ed8" opacity="0">set_idx = 45 → 组 13<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.62273;0.63182;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1040" y="448" class="ck" fill="#64748b" opacity="0">tag 低 6 位恰为 set_idx（同一段位移），教学模型简化<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.63636;0.64545;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1040" y="470" class="ph">④ 4 路组相联比较（组 13）</text>
+<rect x="1040" y="494" width="520" height="36" rx="6" fill="#f1f5f9" opacity="0" stroke="#e2e8f0" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.67273;0.67955;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="1052" y="518" class="ck" opacity="0">way0<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.67273;0.67955;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1110" y="518" class="cv" opacity="0">tag 0x1A2B<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.67273;0.67955;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1260" y="518" class="ck" fill="#64748b" opacity="0">≠ 查找 tag 0x33AD<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.68091;0.68864;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="1040" y="538" width="520" height="36" rx="6" fill="#f1f5f9" opacity="0" stroke="#e2e8f0" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.69318;0.70000;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="1052" y="562" class="ck" opacity="0">way1<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.69318;0.70000;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1110" y="562" class="cv" opacity="0">tag 0x3F08<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.69318;0.70000;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1260" y="562" class="ck" fill="#64748b" opacity="0">≠ 查找 tag 0x33AD<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.70136;0.70909;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="1040" y="582" width="520" height="36" rx="6" fill="#ffffff" opacity="0" stroke="#16a34a" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.71364;0.72045;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="1052" y="606" class="ck" opacity="0">way2<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.71364;0.72045;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1110" y="606" class="cv" opacity="0">tag 0x33AD<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.71364;0.72045;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1260" y="606" class="ck" fill="#16a34a" opacity="0">= 命中 查找 tag 0x33AD<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.72182;0.72955;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1460" y="606" class="ck" fill="#16a34a" opacity="0">key 16B ✓<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.73182;0.74091;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="1040" y="626" width="520" height="36" rx="6" fill="#f1f5f9" opacity="0" stroke="#e2e8f0" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.73409;0.74091;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="1052" y="650" class="ck" opacity="0">way3<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.73409;0.74091;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1110" y="650" class="cv" opacity="0">tag 0x07D5<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.73409;0.74091;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1260" y="650" class="ck" fill="#64748b" opacity="0">≠ 查找 tag 0x33AD<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.74227;0.75000;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="40" y="660" class="ph">⑤ ib1 判决 → FLOW_BUF 锁存 → 主表槽位</text>
+<text x="370" y="660" class="ck" fill="#64748b">miss → PUNT：hash_idx 随 rxd_meta 回带，CPU O(1) 定位建流</text>
+<rect x="40" y="676" width="106" height="34" rx="6" fill="#f1f5f9" opacity="0" stroke="#e2e8f0" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.82727;0.83409;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="93" y="698" class="ck" fill="#64748b" text-anchor="middle" opacity="0">INVALID<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.82727;0.83409;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="158" y="676" width="106" height="34" rx="6" fill="#f1f5f9" opacity="0" stroke="#e2e8f0" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.83273;0.83955;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="211" y="698" class="ck" fill="#64748b" text-anchor="middle" opacity="0">UNBIND<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.83273;0.83955;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="276" y="676" width="106" height="34" rx="6" fill="#16a34a" opacity="0" stroke="#16a34a" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.83818;0.84500;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="329" y="698" class="ck" fill="#ffffff" text-anchor="middle" opacity="0">BIND<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.83818;0.84500;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="394" y="676" width="106" height="34" rx="6" fill="#f1f5f9" opacity="0" stroke="#e2e8f0" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.84364;0.85045;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="447" y="698" class="ck" fill="#64748b" text-anchor="middle" opacity="0">FIN<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.84364;0.85045;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="40" y="734" class="ck" opacity="0">BIND → 硬件直转 FWD；其余三态 → PUNT 上 CPU<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.85455;0.86364;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="540" y="676" width="96" height="60" rx="6" fill="#0b1220" opacity="0" stroke="#334155" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.85909;0.86591;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="550" y="694" class="fl">ib1 4B</text>
+<text x="550" y="714" class="fv" opacity="0" font-size="11.5">state=BIND<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.85909;0.86591;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="644" y="676" width="260" height="60" rx="6" fill="#0b1220" opacity="0" stroke="#334155" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.86727;0.87409;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="654" y="694" class="fl">key 16B</text>
+<text x="654" y="714" class="fv" opacity="0" font-size="11.5">…匹配 key…<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.86727;0.87409;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="912" y="676" width="300" height="60" rx="6" fill="#14532d" opacity="0" stroke="#16a34a" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.87545;0.88227;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="922" y="694" class="fl">act 28B</text>
+<text x="922" y="714" class="fvn" opacity="0" font-size="11.5">new_ip 192.168.1.12<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.87545;0.88227;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="922" y="731" class="fvn" opacity="0" font-size="11.5">new_port 51333 · dmac 0200…000A<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.87545;0.88227;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="1220" y="676" width="140" height="60" rx="6" fill="#0b1220" opacity="0" stroke="#334155" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.88364;0.89045;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="1230" y="694" class="fl">cnt 16B</text>
+<text x="1230" y="714" class="fv" opacity="0" font-size="11.5">pkt/byte 计数<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.88364;0.89045;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="540" y="758" class="ck" opacity="0">↑ 主表槽位 1501 的 64B 表项锁入 FLOW_BUF（act 区即 ③替换 的源操作数）<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.89545;0.90455;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="40" y="452" class="ph">⑥ miss 时：hash_idx 随 PUNT 回带 → CPU O(1) 建流</text>
+<text x="540" y="452" class="ck" fill="#64748b">软件是唯一控制面的关键闭环</text>
+<rect x="40" y="468" width="218" height="62" rx="6" fill="#ffffff" opacity="0" stroke="#b45309" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.93182;0.93864;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="52" y="490" class="ph" fill="#b45309" opacity="0">PUNT<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.93182;0.93864;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="52" y="512" class="ck" fill="#64748b" opacity="0" font-size="10.5">rxd_meta{hash_idx=1501,…}<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.93182;0.93864;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="272" y="468" width="218" height="62" rx="6" fill="#ffffff" opacity="0" stroke="#b45309" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.94182;0.94864;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="284" y="490" class="ph" fill="#b45309" opacity="0">CPU 建流<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.94182;0.94864;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="284" y="512" class="ck" fill="#64748b" opacity="0" font-size="10.5">查 NAT/ARP/FDB 组装 64B 表项<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.94182;0.94864;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="504" y="468" width="218" height="62" rx="6" fill="#ffffff" opacity="0" stroke="#b45309" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.95182;0.95864;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="516" y="490" class="ph" fill="#b45309" opacity="0">两阶段发布<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.95182;0.95864;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="516" y="512" class="ck" fill="#64748b" opacity="0" font-size="10.5">写 body → dmb → 单字写 ib1=BIND<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.95182;0.95864;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="736" y="468" width="218" height="62" rx="6" fill="#ffffff" opacity="0" stroke="#b45309" stroke-width="1.5"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.96182;0.96864;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="748" y="490" class="ph" fill="#b45309" opacity="0">下包命中<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.96182;0.96864;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="748" y="512" class="ck" fill="#64748b" opacity="0" font-size="10.5">同 key 再来 → 直接落组 13 way2<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.96182;0.96864;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="40" y="770" class="ck">主表 8192 项（DDR/L2RAM，64B/项）</text>
+<rect x="40" y="780" width="1520" height="40" rx="4" fill="#e2e8f0" opacity="1.0" stroke="#cbd5e1" stroke-width="1.5"></rect>
+<line x1="40.0" y1="780" x2="40.0" y2="820" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="135.0" y1="780" x2="135.0" y2="820" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="230.0" y1="780" x2="230.0" y2="820" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="325.0" y1="780" x2="325.0" y2="820" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="420.0" y1="780" x2="420.0" y2="820" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="515.0" y1="780" x2="515.0" y2="820" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="610.0" y1="780" x2="610.0" y2="820" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="705.0" y1="780" x2="705.0" y2="820" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="800.0" y1="780" x2="800.0" y2="820" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="895.0" y1="780" x2="895.0" y2="820" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="990.0" y1="780" x2="990.0" y2="820" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="1085.0" y1="780" x2="1085.0" y2="820" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="1180.0" y1="780" x2="1180.0" y2="820" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="1275.0" y1="780" x2="1275.0" y2="820" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="1370.0" y1="780" x2="1370.0" y2="820" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="1465.0" y1="780" x2="1465.0" y2="820" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="1560.0" y1="780" x2="1560.0" y2="820" stroke="#cbd5e1" stroke-width="1"/>
+<rect x="313.505859375" y="776" width="10" height="48" rx="2" fill="#0f766e" opacity="0"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.90455;0.91364;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="326.505859375" y="842" class="ck" fill="#0f766e" opacity="0">下行本流 1501<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.90455;0.91364;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<rect x="800.380859375" y="776" width="10" height="48" rx="2" fill="#6d28d9" opacity="0"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.94545;0.95455;1.00000" dur="22.0s" repeatCount="indefinite"/></rect>
+<text x="813.380859375" y="842" class="ck" fill="#6d28d9" opacity="0">上行反向 4125<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.94545;0.95455;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+<text x="1560" y="842" class="ck" fill="#64748b" text-anchor="end" opacity="0">0 … 8191<animate attributeName="opacity" values="0;0;1;1" keyTimes="0.00000;0.90455;0.91364;1.00000" dur="22.0s" repeatCount="indefinite"/></text>
+</svg>
