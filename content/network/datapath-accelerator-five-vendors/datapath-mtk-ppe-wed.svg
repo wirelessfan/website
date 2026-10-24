@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 330" font-family="system-ui, 'Segoe UI', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a6472"/>
+    </marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1d84a8"/>
+    </marker>
+  </defs>
+  <style>
+    .t   { fill: #24292f; font-size: 14px; text-anchor: middle; }
+    .ts  { fill: #5a6472; font-size: 12px; text-anchor: middle; }
+    .box { fill: #eceff3; stroke: #8a94a0; stroke-width: 1.5; }
+    .hi  { fill: #d9ecf5; stroke: #1d84a8; stroke-width: 1.8; }
+    .chip{ fill: #ffffff; stroke: #8a94a0; stroke-width: 1; }
+  </style>
+
+  <text class="t" x="440" y="24" style="font-size:16px; font-weight:bold;">联发科 PPE + WED：两头归 CPU，中间归硬件</text>
+
+  <!-- CPU slow path -->
+  <rect class="box" x="370" y="40" width="200" height="52" rx="8"/>
+  <text class="t" x="470" y="62">CPU（慢路径）</text>
+  <text class="ts" x="470" y="80">建流 · 首包改头 · 挥手</text>
+
+  <!-- punt / commit arrows -->
+  <line x1="440" y1="120" x2="440" y2="96" stroke="#5a6472" stroke-width="1.5" marker-end="url(#ar)"/>
+  <text class="ts" x="330" y="100">① 首包 PUNT（捎带 14-bit 槽位号）</text>
+  <line x1="530" y1="96" x2="530" y2="120" stroke="#1d84a8" stroke-width="1.5" marker-end="url(#ara)"/>
+  <text class="ts" x="612" y="100">② 软件提交 BIND · O(1) 回填</text>
+
+  <!-- ingress -->
+  <rect class="box" x="25" y="150" width="155" height="64" rx="8"/>
+  <text class="t" x="102" y="176">入口</text>
+  <text class="ts" x="102" y="196">Wi-Fi(WFDMA) / 有线</text>
+
+  <!-- PPE -->
+  <rect class="hi" x="240" y="130" width="390" height="110" rx="10"/>
+  <text class="t" x="435" y="152" style="font-weight:bold;">PPE 流表（FOE）· ib1 四态</text>
+  <rect class="chip" x="262" y="168" width="76" height="30" rx="6"/>
+  <text class="ts" x="300" y="187">INVALID</text>
+  <rect class="chip" x="352" y="168" width="76" height="30" rx="6"/>
+  <text class="ts" x="390" y="187">UNBIND</text>
+  <rect class="hi" x="442" y="168" width="76" height="30" rx="6"/>
+  <text class="ts" x="480" y="187" style="fill:#14607c;">BIND</text>
+  <rect class="chip" x="532" y="168" width="76" height="30" rx="6"/>
+  <text class="ts" x="570" y="187">FIN</text>
+  <line x1="338" y1="183" x2="350" y2="183" stroke="#5a6472" stroke-width="1.2" marker-end="url(#ar)"/>
+  <line x1="428" y1="183" x2="440" y2="183" stroke="#1d84a8" stroke-width="1.2" marker-end="url(#ara)"/>
+  <line x1="518" y1="183" x2="530" y2="183" stroke="#5a6472" stroke-width="1.2" marker-end="url(#ar)"/>
+  <text class="ts" x="435" y="222">硬件计包、软件扣扳机 —— 未达门限的流全走 CPU 慢路径</text>
+
+  <!-- WED -->
+  <rect class="box" x="700" y="140" width="155" height="84" rx="8"/>
+  <text class="t" x="777" y="166">WED 翻译官</text>
+  <text class="ts" x="777" y="186">标准描述符 + WINFO</text>
+  <text class="ts" x="777" y="204">→ 直写 Wi-Fi 门铃</text>
+
+  <line x1="180" y1="182" x2="236" y2="182" stroke="#5a6472" stroke-width="1.5" marker-end="url(#ar)"/>
+  <line x1="630" y1="182" x2="696" y2="182" stroke="#5a6472" stroke-width="1.5" marker-end="url(#ar)"/>
+
+  <text class="ts" x="440" y="278">快车道：BIND 流查表命中 → 改头 → WED 直推，基本不过 CPU</text>
+  <text class="ts" x="440" y="300">原子发布：先写表项其余字段 + wmb 屏障，最后单条 32 位写翻转状态位</text>
+  <text class="ts" x="440" y="318">（主线锚点：mtk_ppe.h:99-104 · mtk_eth_soc.c:2351-2360 · mtk_wed.c）</text>
+</svg>

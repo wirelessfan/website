@@ -30,6 +30,8 @@ description: "做嵌入式数据面加速前，把五大芯片厂商交过流片
 
 代表作 MT7621、Filogic MT7981/7986/7988（OpenWrt 与运营商路由器主力）。主线源码：`drivers/net/ethernet/mediatek/mtk_ppe.c`、`mtk_wed.c`。
 
+![联发科 PPE + WED：四态流表、延迟绑定与 WED 翻译官](datapath-mtk-ppe-wed.svg)
+
 **理念：两头归 CPU，中间归硬件。** 一条连接的生命周期分三段——建立（握手/首包）、稳定传输、关闭（FIN/RST）。让硬件处理建流、端口分配或挥手状态机，逻辑复杂十倍。MTK 像 ETC 车道：只放行已办卡正常行驶的车（稳态流），办卡和销户全走人工车道（CPU）。
 
 **绝技（均为主线代码级）：**
@@ -45,6 +47,8 @@ description: "做嵌入式数据面加速前，把五大芯片厂商交过流片
 
 代表作 Snapdragon X55/X65/X75（全球多数高端 5G CPE 与 MiFi 的心脏）。主线源码：`drivers/net/ipa/`。
 
+![高通 IPA：统一引擎服务 5G/USB/Wi-Fi 三种异构封装](datapath-qcom-ipa.svg)
+
 **理念：统一 GSI 管道 + 查表 + 头部处理上下文，应对多协议异构封装。** 5G 蜂窝吐 `QMAP/RMNET` 头，USB 要 `RNDIS/ECM` 头，Wi-Fi 要 `802.3 + WDI` 头——IPA 的任务就是让同一颗引擎服务这三端。
 
 **绝技：**
@@ -57,6 +61,8 @@ description: "做嵌入式数据面加速前，把五大芯片厂商交过流片
 
 代表作 Layerscape LS1012A（源自 Mindspeed Comcerto C2000）。注意：Linux **主线没有**该驱动，位于 NXP vendor 内核 `nxp-qoriq/linux` 的 `drivers/staging/fsl_ppfe/`（B 级）。
 
+![NXP PPFE：头窗微码与带偏移的伸缩写回](datapath-nxp-ppfe.svg)
+
 **理念：最纯粹的头窗微码机。** 完整报文由 BMU 缓冲管理器存进外部 DDR 缓冲池；只把包头窗口 DMA 进 Class PE 本地内存，微码固件（`class_fw.elf`）改写后**只刷回改动的首部字节**，Payload 纹丝不动。
 
 **最值得借鉴的一点：头长会变。** 不同出口需要的私有头长度不一样——USB RNDIS 前置十几个字节、Wi-Fi TX 前置更长的私有头，未来加 VLAN/PPPoE 还会变。若引擎只会"原位置写回"，头长一变软件就得 `memmove` 整包搬移，加速全白干。解法是在缓冲区预留头部空间，包头窗内伸缩后**按新起点写回并同步更新描述符的偏移与长度**——Payload 一字节不搬。我们把这个思路内化为"带符号偏移的写回"（自命名，机制方向参考 NXP 手册对头窗/缓冲预留的用法）。
@@ -64,6 +70,8 @@ description: "做嵌入式数据面加速前，把五大芯片厂商交过流片
 ## 北丐 · Broadcom：Runner & Archer —— 弯路归来，大道至简
 
 代表作 BCM4908/6858（Runner/XRDP）、BCM6756/63178（Archer）。**声明：主线与 OpenWrt 树均无任何 Runner/Archer 代码，本派全部内容属私有 SDK/社区逆向（D 级 lore），只取机制方向，不引用任何数字。**
+
+![博通：从多核并发的弯路收敛到无环命令式处理与分级流表](datapath-brcm-archer.svg)
 
 **演进路线本身就是活教材：**
 
@@ -80,6 +88,8 @@ description: "做嵌入式数据面加速前，把五大芯片厂商交过流片
 代表作 Armada 3700/7040/8040/CN9130。主线源码：`drivers/net/ethernet/marvell/mvpp2/`。
 
 **理念：严谨工整，讲究高装载率与极端拥塞下系统不死锁。** 流水线：PRS 解析 → CLS 分类查表 → 微指令改头 → BM 缓冲管理。
+
+![Marvell PPv2：四级流水线与双水位背压护栏](datapath-mrvl-ppv2.svg)
 
 **绝技：**
 

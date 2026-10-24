@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 310" font-family="system-ui, 'Segoe UI', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a6472"/>
+    </marker>
+  </defs>
+  <style>
+    .t   { fill: #24292f; font-size: 14px; text-anchor: middle; }
+    .ts  { fill: #5a6472; font-size: 12px; text-anchor: middle; }
+    .box { fill: #eceff3; stroke: #8a94a0; stroke-width: 1.5; }
+    .hi  { fill: #d9ecf5; stroke: #1d84a8; stroke-width: 1.8; }
+  </style>
+
+  <text class="t" x="440" y="24" style="font-size:16px; font-weight:bold;">高通 IPA：一颗引擎服务三种异构接口</text>
+
+  <!-- endpoints -->
+  <rect class="box" x="40" y="60" width="185" height="62" rx="8"/>
+  <text class="t" x="132" y="86">5G 蜂窝</text>
+  <text class="ts" x="132" y="106">QMAP / RMNET 头</text>
+
+  <rect class="box" x="40" y="200" width="185" height="62" rx="8"/>
+  <text class="t" x="132" y="226">USB</text>
+  <text class="ts" x="132" y="246">RNDIS / ECM 头</text>
+
+  <rect class="box" x="655" y="130" width="185" height="62" rx="8"/>
+  <text class="t" x="747" y="156">Wi-Fi</text>
+  <text class="ts" x="747" y="176">802.3 + WDI 描述符</text>
+
+  <!-- IPA core -->
+  <rect class="hi" x="345" y="105" width="200" height="115" rx="10"/>
+  <text class="t" x="445" y="130" style="font-weight:bold;">IPA 引擎</text>
+  <text class="ts" x="445" y="152">Filter / Route / NAT 表</text>
+  <text class="ts" x="445" y="172">静态头模板 + 头处理上下文</text>
+  <text class="ts" x="445" y="192">统一收发管道</text>
+
+  <!-- GSI shims -->
+  <rect class="box" x="255" y="76" width="70" height="26" rx="6"/>
+  <text class="ts" x="290" y="93">GSI 垫片</text>
+  <rect class="box" x="255" y="220" width="70" height="26" rx="6"/>
+  <text class="ts" x="290" y="237">GSI 垫片</text>
+  <rect class="box" x="565" y="162" width="70" height="26" rx="6"/>
+  <text class="ts" x="600" y="179">GSI 垫片</text>
+
+  <line x1="225" y1="91" x2="251" y2="91" stroke="#5a6472" stroke-width="1.5" marker-end="url(#ar2)"/>
+  <line x1="325" y1="91" x2="370" y2="115" stroke="#5a6472" stroke-width="1.5" marker-end="url(#ar2)"/>
+  <line x1="370" y1="210" x2="325" y2="235" stroke="#5a6472" stroke-width="1.5" marker-end="url(#ar2)"/>
+  <line x1="251" y1="231" x2="225" y2="231" stroke="#5a6472" stroke-width="1.5" marker-end="url(#ar2)"/>
+  <line x1="545" y1="162" x2="561" y2="168" stroke="#5a6472" stroke-width="1.5" marker-end="url(#ar2)"/>
+  <line x1="635" y1="170" x2="651" y2="163" stroke="#5a6472" stroke-width="1.5" marker-end="url(#ar2)"/>
+
+  <text class="ts" x="440" y="262">改完头由 GSI 硬件直推外设描述符环并触发传输 —— CPU 无需逐包参与</text>
+  <text class="ts" x="440" y="284">pipeline-clear 排空屏障仅用于复位路径：独立命令通道 + 探针包确认（不证明端口级静止）</text>
+  <text class="ts" x="440" y="302">（主线锚点：drivers/net/ipa/ · ipa_cmd.h:17/30 · gsi.c）</text>
+</svg>

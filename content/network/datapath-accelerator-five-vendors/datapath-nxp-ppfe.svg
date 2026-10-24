@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 330" font-family="system-ui, 'Segoe UI', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a6472"/>
+    </marker>
+    <marker id="ar3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1d84a8"/>
+    </marker>
+  </defs>
+  <style>
+    .t   { fill: #24292f; font-size: 14px; text-anchor: middle; }
+    .ts  { fill: #5a6472; font-size: 12px; text-anchor: middle; }
+    .box { fill: #eceff3; stroke: #8a94a0; stroke-width: 1.5; }
+    .hi  { fill: #d9ecf5; stroke: #1d84a8; stroke-width: 1.8; }
+    .pay { fill: #f3f5f8; stroke: #b8c2cc; stroke-width: 1.2; }
+    .pad { fill: #f8f4ee; stroke: #c9b89a; stroke-width: 1.2; stroke-dasharray: 5 3; }
+    .new { fill: none; stroke: #1d84a8; stroke-width: 2; stroke-dasharray: 6 3; }
+  </style>
+
+  <text class="t" x="440" y="24" style="font-size:16px; font-weight:bold;">NXP PPFE：头窗微码 —— Payload 纹丝不动，头长伸缩自如</text>
+
+  <rect class="box" x="40" y="60" width="210" height="58" rx="8"/>
+  <text class="t" x="145" y="84">BMU 缓冲管理器</text>
+  <text class="ts" x="145" y="104">完整报文存外部 DDR 缓冲池</text>
+
+  <rect class="hi" x="340" y="52" width="260" height="66" rx="10"/>
+  <text class="t" x="470" y="78" style="font-weight:bold;">Class PE 微码引擎</text>
+  <text class="ts" x="470" y="100">包头窗 DMA 进本地内存 · 微码固件改写</text>
+
+  <rect class="box" x="640" y="52" width="200" height="66" rx="8"/>
+  <text class="t" x="740" y="76">头长会变？</text>
+  <text class="ts" x="740" y="96">VLAN +4B · PPPoE +8B · 私有头 12B/28B</text>
+
+  <!-- buffer -->
+  <rect class="pad" x="60"  y="220" width="130" height="54"/>
+  <text class="ts" x="125" y="243">预留头空间</text>
+  <text class="ts" x="125" y="260">Front Pad</text>
+  <rect class="hi" x="210" y="220" width="110" height="54"/>
+  <text class="ts" x="265" y="243">包头（原位置）</text>
+  <text class="ts" x="265" y="260">DMA 进引擎</text>
+  <rect class="new" x="185" y="220" width="110" height="54"/>
+  <text class="ts" x="240" y="290" style="fill:#14607c;">新偏移写回（± delta 伸缩）</text>
+  <rect class="pay" x="320" y="220" width="500" height="54"/>
+  <text class="ts" x="570" y="251">Payload —— 一个字节都不搬</text>
+
+  <line x1="250" y1="218" x2="400" y2="122" stroke="#1d84a8" stroke-width="1.5" marker-end="url(#ar3a)"/>
+  <text class="ts" x="290" y="150">① 取头窗</text>
+  <line x1="500" y1="122" x2="252" y2="218" stroke="#5a6472" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#ar3)"/>
+  <text class="ts" x="420" y="168">② 改写后按新起点刷回 + 同步更新描述符偏移/长度</text>
+
+  <text class="ts" x="440" y="312">若只会"原位置写回"，头长一变就得 memmove 整包 —— 加速全白干；</text>
+  <text class="ts" x="440" y="328">最小帧 / padding 计算必须在新偏移上进行（ABI 约束）。</text>
+</svg>
