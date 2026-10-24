@@ -6,6 +6,7 @@ defaultContentLanguage: "zh"
 hasCJKLanguage: true
 enableRobotsTXT: true
 enableEmoji: true
+buildFuture: true
 summaryLength: 120
 
 outputs:
