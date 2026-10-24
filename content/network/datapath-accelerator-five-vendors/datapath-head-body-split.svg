@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 300" font-family="system-ui, 'Segoe UI', 'Microsoft YaHei', sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a6472"/>
+    </marker>
+  </defs>
+  <style>
+    .t   { fill: #24292f; font-size: 14px; text-anchor: middle; }
+    .ts  { fill: #5a6472; font-size: 12px; text-anchor: middle; }
+    .box { fill: #eceff3; stroke: #8a94a0; stroke-width: 1.5; }
+    .hi  { fill: #d9ecf5; stroke: #1d84a8; stroke-width: 2; }
+    .pay { fill: #f3f5f8; stroke: #b8c2cc; stroke-width: 1.5; stroke-dasharray: 5 3; }
+  </style>
+
+  <text class="t" x="440" y="28" style="font-size:16px; font-weight:bold;">一个 1500 字节的包，只有最前面的 64~128 字节需要被"看"和"改"</text>
+
+  <!-- packet body -->
+  <rect class="pay" x="60" y="150" width="760" height="60"/>
+  <rect class="hi"  x="60" y="150" width="130" height="60"/>
+  <text class="t" x="125" y="176">包头 64~128B</text>
+  <text class="ts" x="125" y="196">查表 · 改写对象</text>
+  <text class="ts" x="500" y="185">Payload 约 1400B —— 一个字节都不用动，躺在外部共享内存里</text>
+
+  <!-- engine steps -->
+  <rect class="box" x="110" y="60" width="160" height="52" rx="8"/>
+  <text class="t" x="190" y="82">① 查表</text>
+  <text class="ts" x="190" y="100">五元组哈希 → 流表项</text>
+
+  <rect class="box" x="360" y="60" width="160" height="52" rx="8"/>
+  <text class="t" x="440" y="82">② 改头</text>
+  <text class="ts" x="440" y="100">NAT · MAC · TTL</text>
+
+  <rect class="box" x="610" y="60" width="160" height="52" rx="8"/>
+  <text class="t" x="690" y="82">③ 修校验和</text>
+  <text class="ts" x="690" y="100">RFC 1624 差量修正</text>
+
+  <line x1="270" y1="86" x2="352" y2="86" stroke="#5a6472" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="520" y1="86" x2="602" y2="86" stroke="#5a6472" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <line x1="125" y1="142" x2="170" y2="118" stroke="#1d84a8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="440" y1="118" x2="440" y2="142" stroke="#5a6472" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+  <line x1="690" y1="118" x2="690" y2="142" stroke="#5a6472" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+
+  <text class="ts" x="440" y="245">纯 CPU 做这三件事要拖着 1400B Payload 过 uncached 外存（每包数微秒）；</text>
+  <text class="ts" x="440" y="265">1 Gbps 线速 ≈ 149 万包/秒 —— 头身分离是所有主流加速器的共同铁律。</text>
+</svg>

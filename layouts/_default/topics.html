@@ -12,7 +12,7 @@
 <div class="post-content md-content topics-map">
     {{ .Content }}
 
-    {{- range $sec := site.Data.topics.sections }}
+    {{- range $sec := hugo.Data.topics.sections }}
     <section class="topic-section">
         <h2>
             {{- with site.GetPage (printf "/%s/" $sec.key) }}
