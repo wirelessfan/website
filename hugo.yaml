@@ -36,10 +36,14 @@ menu:
       name: 主题
       url: /topics/
       weight: 35
+    - identifier: vip
+      name: "VIP 🔒"
+      url: /vip/
+      weight: 40
     - identifier: archives
       name: 归档
       url: /archives/
-      weight: 40
+      weight: 45
     - identifier: search
       name: 搜索
       url: /search/
@@ -47,7 +51,7 @@ menu:
     - identifier: about
       name: 关于
       url: /about/
-      weight: 60
+      weight: 55
 
 params:
   env: production
