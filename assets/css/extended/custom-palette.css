@@ -1,0 +1,154 @@
+/* ============================================================
+   BW 技术札记 · 浅色调配色
+   通过覆盖 PaperMod 的 CSS 变量 + 少量组件样式实现，
+   主题升级时不会被覆盖（本文件位于 assets/css/extended/）。
+   ============================================================ */
+
+:root {
+    /* 页面背景与光晕（列表页/文章页统一） */
+    --page-bg: #edf3fa;
+    --glow: rgba(45, 140, 190, 0.16);
+
+    /* PaperMod 变量 · 亮色 */
+    --theme: #fbfdff;
+    --entry: #ffffff;
+    --primary: #17324d;
+    --secondary: #4b647c;
+    --tertiary: #c9d8e6;
+    --content: #243b52;
+    --code-bg: #e4eef8;
+    --border: #d9e5f1;
+
+    /* 自定义强调色 */
+    --accent: #1d84a8;
+    --accent-soft: #e2f1f7;
+    --accent-warm: #d97a4e;
+}
+
+:root[data-theme="dark"] {
+    --page-bg: #0f1720;
+    --glow: rgba(70, 150, 200, 0.10);
+
+    --theme: #121b24;
+    --entry: #16222c;
+    --primary: #d9e7f3;
+    --secondary: #8ea9bf;
+    --tertiary: #2a3d4e;
+    --content: #c4d6e5;
+    --code-bg: #1a2833;
+    --border: #24384a;
+
+    --accent: #52c7e8;
+    --accent-soft: #1a2b35;
+    --accent-warm: #e8946e;
+}
+
+/* ---- 页面背景：顶部一层浅色光晕 ---- */
+html {
+    background: var(--page-bg);
+}
+body,
+body.list {
+    background:
+        radial-gradient(1100px 340px at 50% -100px, var(--glow), transparent 72%),
+        var(--page-bg);
+}
+
+/* ---- 文章/首页卡片：白底、细边框、悬浮时泛蓝的柔和阴影 ---- */
+.entry,
+.first-entry {
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 2px rgba(23, 50, 77, 0.04);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.entry:hover,
+.first-entry:hover {
+    border-color: #b9d2e8;
+    box-shadow: 0 8px 22px rgba(45, 140, 190, 0.14);
+}
+:root[data-theme="dark"] .entry:hover,
+:root[data-theme="dark"] .first-entry:hover {
+    border-color: #33526b;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+}
+
+/* ---- 正文链接用强调色 ---- */
+.post-content a,
+.breadcrumbs a {
+    color: var(--accent);
+}
+.post-content a:hover {
+    text-decoration-color: var(--accent);
+}
+
+/* ---- 菜单与站名 hover ---- */
+.menu a:hover,
+.logo a:hover {
+    color: var(--accent);
+}
+
+/* ---- 首页标题：三色渐变（蓝→青→暖橙） ---- */
+.first-entry .entry-header h1 {
+    background: linear-gradient(92deg, var(--accent), #3b82c4 55%, var(--accent-warm));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* ---- 标签：彩色圆角小胶囊 ---- */
+.post-tags a {
+    background: var(--accent-soft);
+    border: none;
+    border-radius: 999px;
+    color: var(--accent);
+    padding: 4px 12px;
+}
+.post-tags a:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+/* ---- 引用块：左侧强调条 + 浅色底 ---- */
+.post-content blockquote {
+    border-inline-start: 3px solid var(--accent);
+    background: var(--accent-soft);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 8px 16px;
+}
+
+/* ---- 表格表头浅色底 ---- */
+.post-content table thead {
+    background: var(--accent-soft);
+}
+
+/* ---- 文章 h2 加淡色下划线，层次更清晰 ---- */
+.post-content h2 {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.3em;
+}
+
+/* ---- 文内代码 chip 用强调色文字 ---- */
+.post-content code {
+    color: #b3542e;
+}
+:root[data-theme="dark"] .post-content code {
+    color: #f0a678;
+}
+
+/* ---- 深色模式下给 SVG 插图加浅色底衬，避免深色线条看不清 ---- */
+:root[data-theme="dark"] .post-content img[src$=".svg"] {
+    background: #f6f9fc;
+    border-radius: var(--radius);
+    padding: 6px;
+}
+
+/* ---- 选中文字的底色 ---- */
+::selection {
+    background: rgba(45, 140, 190, 0.28);
+}
+
+/* ---- 页脚分隔线染成淡蓝 ---- */
+.footer {
+    border-top: 1px solid var(--border);
+}
