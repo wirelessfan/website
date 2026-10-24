@@ -21,13 +21,15 @@ jobs:
           extended: true
 
       - name: Build
-        run: hugo --gc --minify
+        run: hugo --gc --minify --baseURL "${VPS_BASEURL:-http://localhost:1313/}"
+        env:
+          VPS_BASEURL: ${{ secrets.VPS_BASEURL }}
 
       - name: Deploy to VPS
         uses: easingthemes/ssh-deploy@v5
         env:
           SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_KEY }}
-          REMOTE_HOST: 123.56.217.104
+          REMOTE_HOST: ${{ secrets.VPS_HOST }}
           REMOTE_USER: root
           TARGET: /var/www/blog/
           ARGS: -avz --delete

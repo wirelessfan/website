@@ -1,4 +1,4 @@
-baseURL: "http://123.56.217.104/"
+baseURL: "http://localhost:1313/"
 title: "BW 技术札记"
 theme: "PaperMod"
 locale: "zh-cn"

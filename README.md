@@ -27,8 +27,11 @@ front matter 常用字段：`title`、`date`、`tags`、`description`（列表�
 
 ## 发布
 
+真实服务器地址放在 `deploy/local.env`（已 gitignore，不入库，参考 `deploy/local.env.example`）：
+
 ```bash
-bash deploy/deploy.sh          # 本地构建 + tar/rsync 推送到 aliyun:/var/www/blog
+cp deploy/local.env.example deploy/local.env   # 首次：填入 BLOG_URL / WEB_ROOT / REMOTE
+bash deploy/deploy.sh                          # 本地构建 + tar/rsync 推送
 ```
 
 首次部署前，服务器需要初始化一次（安装 Caddy 并配置站点，不影响已有 WireGuard/demo 服务）：
@@ -41,12 +44,20 @@ ssh aliyun "bash -s" < deploy/server-setup.sh
 
 ## CI 自动发布（可选）
 
-推送到 GitHub 并配置 `Settings → Secrets → VPS_SSH_KEY`（可登录 VPS 的私钥）后，
-`.github/workflows/deploy.yml` 会在 push 到 main 时自动构建并 rsync 部署。
+推送到 GitHub 并在仓库 Settings → Secrets and variables → Actions 配置三个 Secret：
+
+| Secret | 内容 |
+|---|---|
+| `VPS_SSH_KEY` | 可登录 VPS 的私钥（pem 全文，含 BEGIN/END 行） |
+| `VPS_HOST` | 服务器地址 |
+| `VPS_BASEURL` | 站点对外地址，如 `http://x.x.x.x/`（影响 RSS/搜索索引） |
+
+配置后 `.github/workflows/deploy.yml` 会在 push 到 main 时自动构建并 rsync 部署。
+未配置 Secret 时 Deploy 步骤会失败（红叉属预期，不影响本地 `deploy.sh` 部署）。
 
 ## 写作约定（重要）
 
 - **三层分类**：栏目（`content/chip|network|ai`）→ 主题分类（`categories`，从 `data/topics.yaml` 框架中选取，一个栏目可写多个）→ 标签（`tags`，自由关键词）。框架本身在 `data/topics.yaml` 维护，「主题」页自动渲染并计数。
-- **脱敏**：不写真实公网 IP（试验台 IP、实例 ID）、密钥、客户名称、公司内部代码路径；示例一律用 RFC 5737 地址（如 `203.0.113.x`）。
+- **脱敏**：仓库公开可分享——真实公网 IP 只允许出现在两处不入库/加密的位置：本地 `deploy/local.env`（gitignore）与 GitHub Secrets；文章与源码中一律用 RFC 5737 示例地址（如 `203.0.113.x`），且不出现密钥、客户名称、公司内部代码路径。
 - 内容基于真实项目复盘，选型结论注明前提条件与时间。
 - 大文件/图片放文章同名 bundle 目录内，不要引用仓库外路径。
