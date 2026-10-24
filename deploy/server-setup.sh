@@ -33,8 +33,12 @@ cat > /etc/caddy/Caddyfile <<'CADDYFILE'
 	root * /var/www/blog
 	file_server
 	encode zstd gzip
+	import /etc/caddy/vip.conf
 }
 CADDYFILE
+
+# VIP 区访问控制（由 deploy/vip-auth-setup.sh 生成/更新；占位文件保证 import 不报错）
+[[ -f /etc/caddy/vip.conf ]] || printf '# VIP auth placeholder: run deploy/vip-auth-setup.sh\n' > /etc/caddy/vip.conf
 
 systemctl enable --now caddy >/dev/null 2>&1 || true
 systemctl reload caddy 2>/dev/null || systemctl restart caddy

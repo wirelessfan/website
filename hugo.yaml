@@ -75,3 +75,9 @@ markup:
     noClasses: true
     lineNos: false
     codeFences: true
+module:
+  mounts:
+    - source: content
+      target: content
+    - source: vip-content
+      target: content/vip

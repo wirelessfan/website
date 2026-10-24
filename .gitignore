@@ -3,6 +3,9 @@ resources/
 .hugo_build.lock
 tools/
 deploy/local.env
+vip-content/
+content/vip/*
+!content/vip/_index.md
 *.pem
 *.key
 *.pem.*

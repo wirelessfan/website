@@ -42,6 +42,18 @@ ssh aliyun "bash -s" < deploy/server-setup.sh
 
 若服务器已装好但外网打不开，多半是阿里云轻量控制台防火墙没放行 TCP 80。
 
+## VIP 专区（受限文章）
+
+- **源码隔离**：VIP 文章放 `vip-content/`（已 gitignore，不入公开仓），由 `hugo.yaml` 的 module mounts 挂到 `content/vip/`；入库的 `content/vip/_index.md` 只维护栏目说明与文章链接。
+- **构建隔离**：`cascade.build.list=never`——VIP 文章不进搜索索引/RSS/sitemap/归档/分类，只渲染 `/vip/` 路径下的页面（已验证零泄漏）。
+- **服务器侧**：`/vip` 由 Caddy Basic Auth 保护（2.6.x 指令名 `basicauth`）。配置/更换口令：
+
+  ```bash
+  ssh aliyun "bash -s -- <用户名> <密码>" < deploy/vip-auth-setup.sh   # 密码留空则随机生成
+  ```
+
+- **安全边界**：IP 直访阶段无 TLS，Basic Auth 是访问控制而非加密（口令与内容走明文）——VIP 内容仍须脱敏，绑域名后升级 HTTPS 才是完整方案。
+
 ## CI 自动发布（可选）
 
 推送到 GitHub 并在仓库 Settings → Secrets and variables → Actions 配置三个 Secret：
