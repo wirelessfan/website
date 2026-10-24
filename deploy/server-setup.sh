@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # 在 VPS 上执行一次（服务器侧初始化，不影响已有 WireGuard hub 与 demo 服务）：
 #   ssh aliyun "bash -s" < deploy/server-setup.sh
-# 或先上传脚本再执行: sudo bash server-setup.sh
+# 自包含：Caddyfile 内嵌于脚本，不依赖上传其他文件。
 set -euo pipefail
 
 if [[ $(id -u) -ne 0 ]]; then
@@ -25,10 +25,18 @@ install -d -m 755 /var/www/blog
 if [[ -f /etc/caddy/Caddyfile ]]; then
     cp /etc/caddy/Caddyfile "/etc/caddy/Caddyfile.bak.$(date +%Y%m%d%H%M%S)"
 fi
-script_dir=$(cd "$(dirname "$0")" && pwd)
-install -m 644 "$script_dir/Caddyfile" /etc/caddy/Caddyfile
 
-systemctl enable --now caddy
+cat > /etc/caddy/Caddyfile <<'CADDYFILE'
+# 博客站点（IP 直访阶段）。
+# 备案后绑域名：把 :80 改成你的域名，Caddy 会自动签发并续期 HTTPS 证书。
+:80 {
+	root * /var/www/blog
+	file_server
+	encode zstd gzip
+}
+CADDYFILE
+
+systemctl enable --now caddy >/dev/null 2>&1 || true
 systemctl reload caddy 2>/dev/null || systemctl restart caddy
 
 echo "---- 完成。检查监听: ss -ltnp | grep -E ':80\b'"
