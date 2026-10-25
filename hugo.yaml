@@ -56,6 +56,12 @@ menu:
 
 params:
   env: production
+  description: "芯片设计与选型、网络技术优化、AI 自动化三个方向的工程实践与技术探讨。"
+  assets:
+    favicon: favicon.svg
+    favicon16x16: favicon.svg
+    favicon32x32: favicon.svg
+    apple_touch_icon: favicon.svg
   defaultTheme: auto
   ShowReadingTime: true
   ShowShareButtons: false

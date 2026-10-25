@@ -45,6 +45,7 @@ ssh aliyun "bash -s" < deploy/server-setup.sh
 ## VIP 专区（受限文章）
 
 - **源码隔离**：VIP 文章放 `vip-content/`（已 gitignore，不入公开仓），由 `hugo.yaml` 的 module mounts 挂到 `content/vip/`；入库的 `content/vip/_index.md` 只维护栏目说明与文章链接。
+- **版本备份**：`vip-content/` 内有独立 git 仓（与主仓无关），每次新增/修改 VIP 文章后在里面 commit；建议再挂一个私有远端（GitHub/Gitee private）做异地备份。
 - **构建隔离**：`cascade.build.list=never`——VIP 文章不进搜索索引/RSS/sitemap/归档/分类，只渲染 `/vip/` 路径下的页面（已验证零泄漏）。
 - **服务器侧**：`/vip` 由 Caddy Basic Auth 保护（2.6.x 指令名 `basicauth`）。配置/更换口令：
 

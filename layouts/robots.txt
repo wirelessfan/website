@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /vip/
+
+Sitemap: {{ "sitemap.xml" | absURL }}
