@@ -21,5 +21,8 @@ cascade:
 - [U560 WireGuard 实现架构详解（内部完整版）](/vip/u560-wireguard-architecture/)
 - [WireGuard S1-00 契约包与实现任务书](/vip/wg-s1-contract/)
 - [WireGuard S1 实现 Review 与验收档案](/vip/wg-s1-review-archive/)
+- [ AIC WiFi-SDIO 数据通路与 Packet Parser 详解（反编译实码）](/vip/aic-wifi-sdio-datapath/)
+- [ U380 双核优化整体策略](/vip/u380-dualcore-optimization-strategy/)
+- [ U380 MiFi：light-ap 与 PS 的 virtio 通信简化方案（保留 uni_netbuf）](/vip/lightap-virtio-simplify/)
 
 <!-- 新增 VIP 文章后在此手工追加链接（本区文章不进搜索/RSS/归档/分类） -->
