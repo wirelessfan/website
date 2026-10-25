@@ -37,6 +37,10 @@ menu:
       name: 主题
       url: /topics/
       weight: 35
+    - identifier: follow_up
+      name: "Follow Up"
+      url: /follow_up/
+      weight: 38
     - identifier: vip
       name: "VIP 🔒"
       url: /vip/

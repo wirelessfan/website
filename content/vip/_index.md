@@ -25,6 +25,6 @@ cascade:
 - [AIC WiFi-SDIO 数据通路与 Packet Parser 详解（反编译实码）](/vip/aic-wifi-sdio-datapath/)
 - [U380 双核优化整体策略](/vip/u380-dualcore-optimization-strategy/)
 - [U380 MiFi：light-ap 与 PS 的 virtio 通信简化方案（保留 uni_netbuf）](/vip/lightap-virtio-simplify/)
-- [U380 数据面优化：两大系统性问题的跟进方案](/vip/u380-datapath-followup-plan/)
+- [U380 数据面优化：两大系统性问题的跟进方案（已迁入 Follow Up）](/follow_up/u380-datapath-followup-plan/)
 
 <!-- 新增 VIP 文章后在此手工追加链接（本区文章不进搜索/RSS/归档/分类） -->
