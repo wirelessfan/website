@@ -16,5 +16,6 @@ cascade:
 - [BW NAT 加速器实现探索概览：两条路线](/vip/bw-nat-accelerator-two-routes/)
 - [BW Wi-Fi 需要支持的 Packet Parser 格式详解](/vip/packet-parser-formats/)
 - [uni_netbuf 三通路收发拆解](/vip/uni-netbuf-three-paths/)
+- [BW fastnat 数据通路详解](/vip/bw-fastnat-datapath/)
 
 <!-- 新增 VIP 文章后在此手工追加链接（本区文章不进搜索/RSS/归档/分类） -->
