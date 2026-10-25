@@ -38,10 +38,11 @@ jobs:
           VPS_BASEURL: ${{ secrets.VPS_BASEURL }}
 
       - name: Deploy to VPS
-        uses: easingthemes/ssh-deploy@v5
+        uses: easingthemes/ssh-deploy@v6
         env:
           SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.VPS_HOST }}
           REMOTE_USER: root
+          SOURCE: public/
           TARGET: /var/www/blog/
           ARGS: -avz --delete
