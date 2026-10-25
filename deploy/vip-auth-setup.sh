@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 在 VPS 上为 /vip/ 配置 HTTP Basic Auth（写入 /etc/caddy/vip.conf 并 reload），支持多账号。
+# 在 VPS 上为 /vip/ 与 /follow_up/ 配置 HTTP Basic Auth（写入 /etc/caddy/vip.conf 并 reload），支持多账号。
 # 本机执行（用户名密码成对传入）：
 #   ssh aliyun "bash -s -- vip <pass> bluewave <pass>" < deploy/vip-auth-setup.sh
 # 密码位置留空（传 ""）则随机生成并打印一次；不传参数则默认生成 vip 账号。
@@ -34,7 +34,7 @@ done
 {
     echo "# VIP 区访问控制（由 deploy/vip-auth-setup.sh 生成；重新运行脚本即可更换口令）"
     echo "# 注意：Caddy 2.6.x 指令名为 basicauth；2.7+ 改名 basic_auth（旧名仍兼容）"
-    echo "@vip path /vip /vip/*"
+    echo "@vip path /vip /vip/* /follow_up /follow_up/*"
     echo "basicauth @vip {"
     printf '%s\n' "${cred_lines[@]}"
     echo "}"
