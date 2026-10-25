@@ -3,8 +3,8 @@
 本站采用"公开仓 + 私有仓"双仓结构：
 
 ```
-wirelessfan/website       （公开仓）Hugo 框架、公开文章、部署脚本
-wirelessfan/website-vip   （私有仓）VIP 文章源码，位于本仓 .gitignore 的 vip-content/
+wirelessfan/website           （公开仓）Hugo 框架、公开文章、部署脚本
+wirelessfan/website-vip-priv  （私有仓）VIP 文章源码，位于本仓 .gitignore 的 vip-content/
 ```
 
 VIP 区在站点上位于 `/vip/`，由服务器 Basic Auth 保护，不出现在搜索/RSS/sitemap/归档中。
@@ -27,7 +27,7 @@ VIP 区在站点上位于 `/vip/`，由服务器 Basic Auth 保护，不出现�
 ```bash
 git clone https://github.com/wirelessfan/website.git blog
 cd blog
-git clone git@github.com:wirelessfan/website-vip.git vip-content   # 私有仓放入忽略槽位
+git clone git@github.com:wirelessfan/website-vip-priv.git vip-content   # 私有仓放入忽略槽位
 ```
 
 > `hugo.yaml` 的 module mounts 会把 `vip-content/` 挂载为 `content/vip/`，构建自动包含。
