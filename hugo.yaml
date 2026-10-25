@@ -38,8 +38,8 @@ menu:
       url: /topics/
       weight: 35
     - identifier: follow_up
-      name: "Follow Up"
-      url: /follow_up/
+      name: "跟进 🔒"
+      url: /vip/follow_up/
       weight: 38
     - identifier: vip
       name: "VIP 🔒"
@@ -97,5 +97,3 @@ module:
       target: content
     - source: vip-content
       target: content/vip
-    - source: vip-content/follow_up
-      target: content/follow_up

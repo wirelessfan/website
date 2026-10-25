@@ -1,4 +1,5 @@
 User-agent: *
 Disallow: /vip/
+Disallow: /follow_up
 
 Sitemap: {{ "sitemap.xml" | absURL }}
