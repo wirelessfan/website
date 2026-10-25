@@ -97,3 +97,5 @@ module:
       target: content
     - source: vip-content
       target: content/vip
+    - source: vip-content/follow_up
+      target: content/follow_up
