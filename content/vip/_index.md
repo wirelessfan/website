@@ -17,5 +17,6 @@ cascade:
 - [BW Wi-Fi 需要支持的 Packet Parser 格式详解](/vip/packet-parser-formats/)
 - [uni_netbuf 三通路收发拆解](/vip/uni-netbuf-three-paths/)
 - [BW fastnat 数据通路详解](/vip/bw-fastnat-datapath/)
+- [同事在线编辑指南（免命令行投稿）](/vip/colleague-online-editing/)
 
 <!-- 新增 VIP 文章后在此手工追加链接（本区文章不进搜索/RSS/归档/分类） -->

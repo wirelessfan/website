@@ -17,4 +17,4 @@ date: 2026-10-24
 
 ## 交流
 
-如需交流指正：[GitHub @wirelessfan](https://github.com/wirelessfan)。评论系统尚未启用，启用后会在本页更新。
+如需交流指正：[GitHub @wirelessfan](https://github.com/wirelessfan)。文章评论区已启用——登录 GitHub 账号即可在任意公开文章下方留言（由 Discussions 承载）。

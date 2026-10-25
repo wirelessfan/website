@@ -1,0 +1,33 @@
+{{- /* giscus 评论（GitHub Discussions 承载）。VIP 区页面不渲染，避免文章路径进公开 Discussions */}}
+{{- if ne .Section "vip" }}
+<div class="post-content" style="margin-top: 2em;">
+    <script src="https://giscus.app/client.js"
+            data-repo="wirelessfan/website"
+            data-repo-id="R_kgDOVV2Znw"
+            data-category="Announcements"
+            data-category-id="DIC_kwDOVV2Zn84DJisF"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="preferred_color_scheme"
+            data-lang="zh-CN"
+            crossorigin="anonymous"
+            async></script>
+    <noscript>启用 JavaScript 才能查看评论（基于 GitHub Discussions）。</noscript>
+</div>
+<script>
+    // 站点明暗切换时同步 giscus 主题
+    (function () {
+        var sync = function () {
+            var t = document.documentElement.dataset.theme;
+            var theme = t === 'dark' ? 'dark' : (t === 'light' ? 'light' : 'preferred_color_scheme');
+            var f = document.querySelector('iframe.giscus-frame');
+            if (f) f.contentWindow.postMessage({ giscus: { setConfig: { theme: theme } } }, 'https://giscus.app');
+        };
+        new MutationObserver(sync).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+        setTimeout(sync, 3000);
+    })();
+</script>
+{{- end }}

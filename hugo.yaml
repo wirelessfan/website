@@ -69,6 +69,7 @@ params:
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
   ShowToc: true
+  comments: true
   mainSections: ["chip", "network", "ai"]
   homeInfoParams:
     Title: BW 技术札记
