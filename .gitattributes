@@ -1,0 +1,5 @@
+# 脚本类强制 LF：服务器端 bash 不认 CRLF（曾因编辑器改写导致 pipefail\r 报错）
+*.sh text eol=lf
+# workflow 与配置统一 LF
+*.yml text eol=lf
+*.yaml text eol=lf
