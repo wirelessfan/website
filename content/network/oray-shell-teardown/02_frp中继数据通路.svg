@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" font-family="Microsoft YaHei, PingFang SC, sans-serif">
+  <defs>
+    <marker id="arrB" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#1565c0"/>
+    </marker>
+    <marker id="arrO" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#ef6c00"/>
+    </marker>
+  </defs>
+
+  <text x="480" y="36" text-anchor="middle" font-size="22" font-weight="bold" fill="#212121">自建中继方案（frp 同构，脱离花生壳）数据通路</text>
+
+  <!-- company PC -->
+  <rect x="40" y="180" width="170" height="90" rx="8" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="125" y="212" text-anchor="middle" font-size="15" font-weight="bold">公司 PC（访问端）</text>
+  <text x="125" y="234" text-anchor="middle" font-size="12" fill="#555">mstsc → vps_ip:6000</text>
+  <text x="125" y="252" text-anchor="middle" font-size="12" fill="#555">零安装（tcp/udp 模式）</text>
+
+  <!-- VPS -->
+  <rect x="360" y="160" width="220" height="130" rx="8" fill="#e3f2fd" stroke="#1565c0" stroke-width="2.5"/>
+  <text x="470" y="190" text-anchor="middle" font-size="15" font-weight="bold">自部署 VPS（公网 IP）</text>
+  <text x="470" y="212" text-anchor="middle" font-size="13" fill="#1565c0">frps 中转服务器</text>
+  <text x="470" y="234" text-anchor="middle" font-size="12" fill="#555">:7000 控制通道（TLS+token）</text>
+  <text x="470" y="252" text-anchor="middle" font-size="12" fill="#555">:6000 映射端口（建议用 443）</text>
+  <text x="470" y="270" text-anchor="middle" font-size="12" fill="#555">安全组：7000 + 443 + 映射段</text>
+
+  <!-- home side big box -->
+  <rect x="640" y="90" width="290" height="290" rx="10" fill="#fafafa" stroke="#9e9e9e" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="785" y="115" text-anchor="middle" font-size="14" font-weight="bold" fill="#616161">家里（4G/5G，双重 NAT 内）</text>
+
+  <rect x="665" y="135" width="240" height="110" rx="8" fill="#fff3e0" stroke="#ef6c00" stroke-width="2"/>
+  <text x="785" y="162" text-anchor="middle" font-size="15" font-weight="bold">MiFi（我们的产品）</text>
+  <text x="785" y="184" text-anchor="middle" font-size="12" fill="#555">frpc / rathole / 自研隧道客户端</text>
+  <text x="785" y="202" text-anchor="middle" font-size="12" fill="#555">阶段0:家PC跑 → 阶段1:Linux MiFi → 阶段2:RTOS自研</text>
+  <text x="785" y="222" text-anchor="middle" font-size="12" fill="#c62828">只做出站连接，心跳 25~30s 保活</text>
+
+  <rect x="665" y="290" width="240" height="70" rx="8" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="785" y="318" text-anchor="middle" font-size="15" font-weight="bold">家里电脑 192.168.1.100</text>
+  <text x="785" y="340" text-anchor="middle" font-size="12" fill="#555">RDP:3389 / SSH:22（被访问服务）</text>
+
+  <!-- arrows -->
+  <!-- ① control channel -->
+  <path d="M 905 190 C 950 190, 950 130, 905 130" fill="none" stroke="none"/>
+  <path d="M 665 160 C 600 130, 640 100, 640 100" fill="none" stroke="none"/>
+  <line x1="660" y1="165" x2="585" y2="200" stroke="#1565c0" stroke-width="3.5" marker-end="url(#arrB)"/>
+  <text x="610" y="158" text-anchor="middle" font-size="13" fill="#1565c0" font-weight="bold">① 出站 TLS 长连接</text>
+  <text x="610" y="176" text-anchor="middle" font-size="12" fill="#1565c0">注册映射 + 心跳30s（穿CGNAT）</text>
+
+  <!-- ② user connection -->
+  <line x1="215" y1="215" x2="355" y2="215" stroke="#ef6c00" stroke-width="3.5" marker-end="url(#arrO)"/>
+  <text x="285" y="200" text-anchor="middle" font-size="13" fill="#ef6c00" font-weight="bold">② 公司PC 连 vps:6000</text>
+
+  <!-- ③ notify -->
+  <line x1="585" y1="240" x2="660" y2="205" stroke="#1565c0" stroke-width="3" stroke-dasharray="7,5" marker-end="url(#arrB)"/>
+  <text x="620" y="240" text-anchor="middle" font-size="12" fill="#1565c0">③ OPEN(conn_id) 下发</text>
+
+  <!-- ④ local forward -->
+  <line x1="785" y1="245" x2="785" y2="286" stroke="#2e7d32" stroke-width="3" marker-end="url(#arrB)"/>
+  <text x="785" y="272" text-anchor="middle" font-size="12" fill="#2e7d32">④ frpc → 家PC:3389</text>
+
+  <!-- ⑤ data relay -->
+  <path d="M 125 275 C 125 430, 470 450, 470 295" fill="none" stroke="#6a1b9a" stroke-width="3" marker-end="url(#arrB)"/>
+  <text x="300" y="445" text-anchor="middle" font-size="14" fill="#6a1b9a" font-weight="bold">⑤ 数据双向转发：公司 ⇄ VPS ⇄ 隧道 ⇄ 家PC</text>
+  <text x="300" y="466" text-anchor="middle" font-size="12" fill="#6a1b9a">带宽 = min(公司下行, MiFi 上行, VPS 带宽)　Cat.1 也能跑 RDP(1~4Mbps)，Cat.4 流畅</text>
+
+  <rect x="640" y="400" width="290" height="60" rx="8" fill="#e8eaf6" stroke="#3f51b5" stroke-width="1.5"/>
+  <text x="785" y="424" text-anchor="middle" font-size="13" fill="#283593">安全提示：RDP/SSH 别用裸 tcp 暴露公网</text>
+  <text x="785" y="444" text-anchor="middle" font-size="12" fill="#283593">用 STCP（访问端也装 frpc）或 TLS+强token</text>
+</svg>

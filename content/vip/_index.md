@@ -18,5 +18,8 @@ cascade:
 - [uni_netbuf 三通路收发拆解](/vip/uni-netbuf-three-paths/)
 - [BW fastnat 数据通路详解](/vip/bw-fastnat-datapath/)
 - [同事在线编辑指南（免命令行投稿）](/vip/colleague-online-editing/)
+- [U560 WireGuard 实现架构详解（内部完整版）](/vip/u560-wireguard-architecture/)
+- [WireGuard S1-00 契约包与实现任务书](/vip/wg-s1-contract/)
+- [WireGuard S1 实现 Review 与验收档案](/vip/wg-s1-review-archive/)
 
 <!-- 新增 VIP 文章后在此手工追加链接（本区文章不进搜索/RSS/归档/分类） -->
