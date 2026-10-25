@@ -20,6 +20,16 @@ BLOG_URL="${BLOG_URL:-http://localhost:1313/}"
 
 cd "$script_dir/.."
 
+# 防误删保护：vip-content 缺失时全量替换会把服务器上的 VIP 页面一起删掉
+if [[ ! -d vip-content ]] || [[ -z $(ls -A vip-content 2>/dev/null) ]]; then
+    echo "错误: vip-content/ 缺失或为空，本次部署中止（防止清空线上 VIP 区）。" >&2
+    echo "  新机器请先按 VIP-GUIDE.md 恢复 vip-content/；确认要无 VIP 部署请设 FORCE_NO_VIP=1" >&2
+    if [[ ${FORCE_NO_VIP:-0} != 1 ]]; then
+        exit 1
+    fi
+    echo "  FORCE_NO_VIP=1：继续无 VIP 部署" >&2
+fi
+
 if ! command -v hugo >/dev/null 2>&1; then
     echo "未找到 hugo 命令。安装: winget install Hugo.Hugo.Extended" >&2
     exit 1

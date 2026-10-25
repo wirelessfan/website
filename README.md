@@ -4,6 +4,7 @@
 
 - 三个栏目：`content/chip`（芯片设计与选型）、`content/network`（网络技术优化）、`content/ai`（AI 自动化）
 - 站点标题/介绍在 `hugo.yaml` 的 `title` 与 `params.homeInfoParams` 中修改
+- **VIP 受限区的访问与投稿流程见 [VIP-GUIDE.md](VIP-GUIDE.md)**
 
 ## 环境准备（一次性）
 

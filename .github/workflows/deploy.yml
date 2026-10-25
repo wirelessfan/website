@@ -20,8 +20,20 @@ jobs:
           hugo-version: "0.168.0"
           extended: true
 
+      - name: Check secrets
+        env:
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_BASEURL: ${{ secrets.VPS_BASEURL }}
+        run: |
+          miss=0
+          [ -n "$VPS_SSH_KEY" ]   || { echo "::error::缺少 secret VPS_SSH_KEY（VPS 私钥全文）"; miss=1; }
+          [ -n "$VPS_HOST" ]      || { echo "::error::缺少 secret VPS_HOST（服务器地址）"; miss=1; }
+          [ -n "$VPS_BASEURL" ]   || { echo "::error::缺少 secret VPS_BASEURL（站点地址，防 localhost 错误构建）"; miss=1; }
+          [ $miss -eq 0 ] || exit 1
+
       - name: Build
-        run: hugo --gc --minify --baseURL "${VPS_BASEURL:-http://localhost:1313/}"
+        run: hugo --gc --minify --baseURL "$VPS_BASEURL"
         env:
           VPS_BASEURL: ${{ secrets.VPS_BASEURL }}
 
