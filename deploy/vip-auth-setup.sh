@@ -34,8 +34,17 @@ done
 {
     echo "# VIP 区访问控制（由 deploy/vip-auth-setup.sh 生成；重新运行脚本即可更换口令）"
     echo "# 注意：Caddy 2.6.x 指令名为 basicauth；2.7+ 改名 basic_auth（旧名仍兼容）"
-    echo "@vip path /vip /vip/* /follow_up /follow_up/*"
-    echo "basicauth @vip {"
+    echo "#"
+    echo "# 图片等静态资源免认证：浏览器加载 <img> 子资源时通常不携带 Basic 凭据，"
+    echo "# 若一并要求认证，正文里的图会 401 破图。仅放行图片扩展名，正文仍受保护。"
+    echo '@vipAssets path_regexp vipAssets \.(svg|png|jpg|jpeg|gif|webp|avif)$'
+    echo ""
+    echo "@vipScope {"
+    echo "	path /vip /vip/* /follow_up /follow_up/*"
+    echo '	not path_regexp vipAssets \.(svg|png|jpg|jpeg|gif|webp|avif)$'
+    echo "}"
+    echo ""
+    echo "basicauth @vipScope {"
     printf '%s\n' "${cred_lines[@]}"
     echo "}"
 } > /etc/caddy/vip.conf
